@@ -21,7 +21,7 @@ public class Sensors{
     Encoder testDistance;
     RobotTemplate templateImports;
     Drivetrain joystickContinuity;
-    AnalogChannel ultrasonic;
+    AnalogChannel ultrasonicFront;
     final double coeffecient = 106;
     Relay flashyLight;
 
@@ -36,7 +36,7 @@ public class Sensors{
         testDistance.start();
         this.joystickContinuity = joystickContinuity;
         this.templateImports = templateImports;
-        ultrasonic = new AnalogChannel(1);
+        ultrasonicFront = new AnalogChannel(1);
         flashyLight = new Relay(3, Relay.Direction.kBoth);
     }
     
@@ -51,8 +51,8 @@ public class Sensors{
         }
     }
     public void ultraSonic(){
-        System.out.println("Distance From Wall: " + ultrasonic.getVoltage() * coeffecient);
-        if((ultrasonic.getVoltage() * coeffecient / 12.0) <= 5.0){
+        System.out.println("Distance From Wall: " + ultrasonicFront.getVoltage() * coeffecient);
+        if((ultrasonicFront.getVoltage() * coeffecient / 12.0) <= 5.0){
             flashyLight.set(Relay.Value.kForward);
         }else{
             flashyLight.set(Relay.Value.kOff);

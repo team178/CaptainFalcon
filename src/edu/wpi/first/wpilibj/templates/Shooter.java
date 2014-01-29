@@ -31,6 +31,9 @@ public class Shooter {
     AnalogChannel analogPressure;
     double psiCount;
     boolean lock;
+    double timeLow;
+    double timeHigh;
+    int arrayCount;
 
         
     public Shooter(){
@@ -45,35 +48,73 @@ public class Shooter {
         level = 0;
         timing = false;
         analogPressure = new AnalogChannel(5);
-
+        stage = new boolean[3];
+        arrayCount = 0;
     }
     public void shootThreeStage(){
         if(auxStick.getRawButton(2) && !shooterLock()){
-            if(true){
-            low.set(true);
+            if(stage[arrayCount]){
+                if(shooterTimer(0, 1000)){
+                    low.set(true);
+                    arrayCount++;
+                }
+            }else if(stage[arrayCount]){
+                if(shooterTimer(0, 1000)){
+                    medium.set(true);
+                    arrayCount++;
+                }
+            }else if(stage[arrayCount]){
+                if(shooterTimer(0, 1000)){
+                    high.set(true);
+                    arrayCount++;
+                }
+            }else if(stage[arrayCount]){
+                if(shooterTimer(0, 1000)){
+                    low.set(false);
+                    medium.set(false);
+                    high.set(false);
+                    arrayCount = 0;
+                }
             }
-            if(true);
-            medium.set(true);
-            //TIMER
-            high.set(true);
-            //TIMER
-            low.set(false);
-            medium.set(false);
-            high.set(false);
         }
     }
     
     public void shootTwoStage(){
-        
+        if(auxStick.getRawButton(2) && !shooterLock()){
+            if(stage[arrayCount]){
+                if(shooterTimer(0, 1000)){
+                    low.set(true);
+                    arrayCount++;
+                }
+            }else if(stage[arrayCount]){
+                if(shooterTimer(0, 1000)){
+                    medium.set(true);
+                    arrayCount++;
+                }
+            }else if(stage[arrayCount]){
+                if(shooterTimer(0, 1000)){
+                    high.set(true);
+                    arrayCount++;
+                }
+            }else if(stage[arrayCount]){
+                if(shooterTimer(750, 1750)){
+                    low.set(false);
+                    medium.set(false);
+                    high.set(false);
+                    arrayCount = 0;
+                }
+            }
+        }
     }
     
-    public boolean shooterTimer(){
+    public boolean shooterTimer(double timeow, double timehigh){
         if(completion == false){
             time.start();
             completion = true;
         }
         if(level <= 2){
-            if(time.get()-initialSetup >= 1000 && time.get()-initialSetup <= 1050){
+            if(time.get() >= timeLow && time.get() <= timeHigh){
+                timing = true;
                 
             }
         }
@@ -82,10 +123,10 @@ public class Shooter {
     
     public boolean shooterLock(){
         System.out.println(psiCount);
-        if (psiCount < 80) {
+        if (auxStick.getRawButton(1)) {
+            lock = false;
+        }else if(psiCount > 80 /*||WoT is true*/){
             lock = true;
-        }else if(true){
-            
         }
         return lock;
     }

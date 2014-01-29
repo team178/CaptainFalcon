@@ -6,6 +6,7 @@
 
 package edu.wpi.first.wpilibj.templates;
 
+import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.DigitalInput;
 
@@ -15,9 +16,10 @@ import edu.wpi.first.wpilibj.DigitalInput;
  */
 public class Compressor {
     Relay compressor;
-    
+    AnalogChannel analogPressure;
     public Compressor(){
         compressor = new Relay(3, Relay.Direction.kForward);
+        analogPressure = new AnalogChannel (5);
     }
     
     public void compressorOn(){
@@ -26,6 +28,15 @@ public class Compressor {
     
     public void compressorOff(){
         compressor.set(Relay.Value.kOff);
+    }
+    
+    public void Analog() {
+        double psiCompressorCount;
+        psiCompressorCount = analogPressure.getVoltage ();
+        System.out.println(psiCompressorCount);
+        if (psiCompressorCount <50) {
+            compressorOn();
+        }
     }
     
 }

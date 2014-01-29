@@ -36,7 +36,6 @@ public class RobotTemplate extends IterativeRobot {
     Shooter shooter;
     Compressor compressor;
     DigitalInput compressorSwitch;
-    
         
         
     public void robotInit() {
