@@ -36,7 +36,7 @@ public class RobotTemplate extends IterativeRobot {
     Shooter shooter;
     Compressor compressor;
     DigitalInput compressorSwitch;
-        
+    Relay iceMotor;
         
     public void robotInit() {
         this.drivetrain = new Drivetrain();
@@ -46,12 +46,15 @@ public class RobotTemplate extends IterativeRobot {
         watchdog = Watchdog.getInstance();
         compressor = new Compressor();
         compressorSwitch = new DigitalInput(10);
+        iceMotor = new Relay(4);
+        iceMotor.set(Relay.Value.kForward);
     }
 
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
+        
         watchdog.feed();
     }
 
