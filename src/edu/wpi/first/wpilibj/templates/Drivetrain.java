@@ -24,19 +24,19 @@ public class Drivetrain implements Component{
     }   
 
     public void tickTeleop(){
-        double yValue = driveStick.getY();
+        double yValue = -driveStick.getY();
         double twistValue = .8*driveStick.getTwist();
         Drivetrain.drive(yValue, twistValue);
     }
     public void tickAuto() {
-        if(true)
+        if(Ultrasonic.getDistanceFromWall() <= 10)
             Drivetrain.drive(0, 0);
         else    
             Drivetrain.drive(.2, 0);
     }
 
     public static void drive(double yValue, double twistValue) {
-        left.set( speedLimit * ( yValue + twistValue ) );
-        right.set( speedLimit * ( yValue - twistValue ) );
+        left.set( speedLimit * -( yValue - twistValue ) );
+        right.set( speedLimit * ( yValue + twistValue ) );
     }
 }

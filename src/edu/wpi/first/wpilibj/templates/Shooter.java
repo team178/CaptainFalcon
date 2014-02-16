@@ -15,9 +15,9 @@ import edu.wpi.first.wpilibj.Relay;
  */
 public class Shooter implements Component{
     private Joystick aux;
-    Relay low;
-    Relay medium;
-    Relay high;
+    static Relay low;
+    static Relay medium;
+    static Relay high;
     
 
     public Shooter(Joystick aux) {
@@ -26,26 +26,29 @@ public class Shooter implements Component{
         medium = new Relay(2);
         high = new Relay(3);
     }
-    
+        
     public void tickTeleop() {
         if(aux.getRawButton(1)){
             extend();
         }else{
             retract();
-        }
-            
+        }   
     }
     public void tickAuto() {
-        
+        if(Ultrasonic.getDistanceFromWall() <= 10){
+            extend();
+        }else{
+            retract();
+        }
     }
 
-    public void retract() {
+    public static void retract() {
         low.set(Relay.Value.kOff);
         medium.set(Relay.Value.kOff);
         high.set(Relay.Value.kOff);
     }
 
-    public void extend() {
+    public static void extend() {
         low.set(Relay.Value.kForward);
         medium.set(Relay.Value.kForward);
         high.set(Relay.Value.kForward);

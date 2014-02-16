@@ -20,7 +20,7 @@ public class Ultrasonic implements Component{
     Encoder testDistance;
     RobotTemplate templateImports;
     static AnalogChannel ultrasonicFront;
-    final double coeffecient = 106;
+    final static double coeffecient = 1/0.628;
     Relay flashyLight;
 
     public Ultrasonic() {
@@ -48,17 +48,19 @@ public class Ultrasonic implements Component{
 //            testDistance.reset();
 //        }
 //    }
-
-    public static double getDistance(){
-        SmartDashboard.putNumber("Distance From Wall", ultrasonicFront.getVoltage()*106/12);
-        SmartDashboard.putBoolean("Shoot Distance", ultrasonicFront.getVoltage()*106/12 >= 9 && ultrasonicFront.getVoltage()*106/12 <= 11);
-        return ultrasonicFront.getVoltage()*106;
+    public static void pushSmartDash(){
+        SmartDashboard.putNumber("Distance From Wall", getDistanceFromWall());
+        //SmartDashboard.putBoolean("Shoot Distance", getDistanceFromWall() >= 9 && getDistanceFromWall() <= 11);
+    }
+    public static double getDistanceFromWall(){
+        return ultrasonicFront.getVoltage() * coeffecient;
     }
 
-    public void tickTeleop() {
-        getDistance();
+    public  void tickTeleop() {
+        pushSmartDash();
     }
 
     public void tickAuto() {
-        getDistance();    }
+        
+    }
 }
