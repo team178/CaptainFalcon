@@ -33,7 +33,8 @@ public class RobotTemplate extends IterativeRobot {
         new Drivetrain(main), 
         new IntakeSystem(aux), 
         new WatchdogWrapper(Watchdog.getInstance()),
-        new Shooter(aux)
+        new Shooter(aux),
+		new Encoders()
     };
     public void robotInit() {
         
