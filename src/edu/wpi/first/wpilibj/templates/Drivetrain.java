@@ -12,24 +12,31 @@ import edu.wpi.first.wpilibj.Victor;
  *
  * @author Enforers
  */
-public class Drivetrain {
-    Joystick driveStick, kidStick;
-    Victor right, left;
-    double speedLimit = 0.75;
+public class Drivetrain implements Component{
+    private Joystick driveStick;
+    private static final Victor left = new Victor(1), right = new Victor(2);
+    private static final double speedLimit = 0.75;
 
-    public Drivetrain() {
+    public Drivetrain(Joystick main) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        this.driveStick = new Joystick(1);
-        this.kidStick = new Joystick(3);
-        left = new Victor(1);
-        right = new Victor(2);
+        this.driveStick = main;
     }   
 
-    public void drive(){
+    public void tickTeleop(){
         double yValue = driveStick.getY();
         double twistValue = .8*driveStick.getTwist();
-            left.set( speedLimit * ( yValue + twistValue ) );
-            right.set( speedLimit * ( yValue - twistValue ) );
+        Drivetrain.drive(yValue, twistValue);
+    }
+    public void tickAuto() {
+        if(true)
+            Drivetrain.drive(0, 0);
+        else    
+            Drivetrain.drive(.2, 0);
+    }
+
+    public static void drive(double yValue, double twistValue) {
+        left.set( speedLimit * ( yValue + twistValue ) );
+        right.set( speedLimit * ( yValue - twistValue ) );
     }
 }

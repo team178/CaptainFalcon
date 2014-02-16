@@ -9,34 +9,24 @@ package edu.wpi.first.wpilibj.templates;
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Joystick;
 
 /**
  *
  * @author Enforers
  */
-public class Compressor {
+public class Compressor implements Component{
     Relay compressor;
-    AnalogChannel analogPressure;
+    DigitalInput cutoff;
     public Compressor(){
-        compressor = new Relay(3, Relay.Direction.kForward);
-        analogPressure = new AnalogChannel (5);
+        compressor = new Relay(4, Relay.Direction.kForward);
+        cutoff = new DigitalInput(6);
     }
-    
-    public void compressorOn(){
-        compressor.set(Relay.Value.kForward);
+
+    public void tickTeleop() {
+        compressor.set(cutoff.get()?Relay.Value.kOff:Relay.Value.kForward);
     }
-    
-    public void compressorOff(){
-        compressor.set(Relay.Value.kOff);
+    public void tickAuto() {
+        compressor.set(cutoff.get()?Relay.Value.kOff:Relay.Value.kForward);
     }
-    
-    public void Analog() {
-        double psiCompressorCount;
-        psiCompressorCount = analogPressure.getVoltage ();
-        System.out.println(psiCompressorCount);
-        if (psiCompressorCount <50) {
-            compressorOn();
-        }
-    }
-    
 }

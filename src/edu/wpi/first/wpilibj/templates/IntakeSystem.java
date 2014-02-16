@@ -1,50 +1,33 @@
 package edu.wpi.first.wpilibj.templates;
 
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 
-public class IntakeSystem {
-    Solenoid extend;
-    Solenoid retract;
+public class IntakeSystem implements Component{
     Victor motorTop;
-    Joystick joystick;
-    boolean intakeValue;
-    public IntakeSystem(){
-        extend = new Solenoid(1);
-        //solenoid to rextend the WoT
-        retract = new Solenoid(2);
-        //solenoid to retract the Wot
+    private final Joystick auxStick;
+    DoubleSolenoid intake;
+    public IntakeSystem(Joystick aux){
+        intake = new DoubleSolenoid(1, 2);
         motorTop = new Victor(3);
-        joystick = new Joystick(1);
+        this.auxStick = aux;
     }
-    public void intake(){
-        if (joystick. getRawButton(1) == true) {
-            //if button #1 is pressed
-            extend.set(true);
-            retract.set(false);
-            //WoT extends
-            if (joystick.getRawButton(2) == true) {
-                //if button #2 is pressed
-                extend.set(false);
-                retract.set(true);
-                //WoT retracts
-            }
-            if (joystick.getRawButton(3) == true) {
-                //if button #3 is pressed
-                motorTop.set(0.5);
-                // motor that runs wheels starts
-            } 
+
+    public void tickTeleop() {
+        if(auxStick.getRawButton(4))
+            intake.set(DoubleSolenoid.Value.kForward);
+        if(auxStick.getRawButton(5))
+            intake.set(DoubleSolenoid.Value.kOff);
+        if(auxStick.getRawButton(6))
+            motorTop.set(1);
+        else if(auxStick.getRawButton(7))
+            motorTop.set(-1);
+        else
+            motorTop.set(0);
         }
-         if (joystick.getRawButton(4) == true) {
-             //if button #4 is pressed
-             motorTop.set(0);
-             //motor that runs wheels stops
-         }
+    public void tickAuto() {
     }
-    public boolean intakeValue() {
-        intakeValue = extend.get();
-        return intakeValue;
-    }
+    
 }

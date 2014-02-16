@@ -8,13 +8,9 @@
 package edu.wpi.first.wpilibj.templates;
 
 
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.Victor;
+
 import edu.wpi.first.wpilibj.Watchdog;
 
 /**
@@ -29,33 +25,25 @@ public class RobotTemplate extends IterativeRobot {
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
-    private Watchdog watchdog;
-    private Drivetrain drivetrain;
-    Timer time;
-    Sensors sense;
-    Shooter shooter;
-    Compressor compressor;
-    DigitalInput compressorSwitch;
-    Relay iceMotor;
-        
+    private final Joystick main = new Joystick(1);
+    private final Joystick aux = new Joystick(2);
+    private final Component[] comps = {
+        new Ultrasonic(),
+        new Compressor(), 
+        new Drivetrain(main), 
+        new IntakeSystem(aux), 
+        new WatchdogWrapper(Watchdog.getInstance()),
+        new Shooter(aux)
+    };
     public void robotInit() {
-        this.drivetrain = new Drivetrain();
-        this.time = new Timer();
-        sense = new Sensors(this.drivetrain);
-        shooter = new Shooter();
-        watchdog = Watchdog.getInstance();
-        compressor = new Compressor();
-        compressorSwitch = new DigitalInput(10);
-        iceMotor = new Relay(4);
-        iceMotor.set(Relay.Value.kForward);
+        
     }
 
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        
-        watchdog.feed();
+        Watchdog.getInstance().feed();
     }
 
     /**
@@ -63,25 +51,12 @@ public class RobotTemplate extends IterativeRobot {
      */
     public void teleopPeriodic() {
         try{
-            //flashyLight.set(Relay.Value.kForward);
-            drivetrain.drive();
-            //drivetrain.kiddyDrive();
-            //sense.encoder();
-            watchdog.feed();
-            sense.ultraSonic();
-            //sense.flashLight();
-            if(!compressorSwitch.get()){
-                compressor.compressorOn();
-            }else{
-                compressor.compressorOff();
-            }
-            if(false/*WoT is true || manual override*/){
-                shooter.shootThreeStage();
-                shooter.shootTwoStage();
-            }
+            for(int i=0;i<comps.length;++i)
+                comps[i].tickTeleop();
+            
         }catch(Exception e){
-            System.out.print(e);
-            watchdog.kill();
+            e.printStackTrace();
+            Watchdog.getInstance().kill();
         }
     }
     
