@@ -26,7 +26,12 @@ public class Shooter implements Component{
     }
         
     public void tickTeleop() {
-        if(aux.getRawButton(1)&&IntakeSystem.isODown()){
+        if( //i'm so sorry
+                aux.getRawButton(1)&&(
+                    IntakeSystem.isODown()||
+                    (aux.getRawButton(7)&&aux.getRawButton(8))
+                )
+        ){
             extend();
             IntakeSystem.setRingIntent(false);
         }else{
