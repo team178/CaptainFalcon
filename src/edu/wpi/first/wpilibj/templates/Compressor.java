@@ -23,6 +23,7 @@ public class Compressor implements Component{
 
     public void tickTeleop() {
         compressor.set(cutoff.get()?Relay.Value.kOff:Relay.Value.kForward);
+		pressure = analogPressure.getVoltage() * 106;
 		SmartDashboard.putNumber("Pressure", pressure);
 		SmartDashboard.putBoolean("PSI to Shoot?", pressure >= 50);
     }
