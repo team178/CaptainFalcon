@@ -17,7 +17,7 @@ public class Ultrasonic implements Component{
     public final static double stolarzConstant = 1/0.628;
 
     public Ultrasonic() {
-        ultrasonicFront.setAverageBits(2);
+        ultrasonicFront.setAverageBits(3);
     }
     public static void pushSmartDash(){
         SmartDashboard.putNumber("Distance From Wall", getDistanceFromWall());

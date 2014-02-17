@@ -43,6 +43,10 @@ public class RobotTemplate extends IterativeRobot {
     public RobotTemplate() {
         self = this; //ignore the warning
     }
+
+    public void teleopInit() {
+        IntakeSystem.setRingIntent(false);
+    }
     
     public void autonomousInit(){
         this.autonomousTimer = new Timer();
