@@ -11,7 +11,7 @@ public class IntakeSystem implements Component{
     private final Talon motorTop = new Talon(3);
     private final Joystick auxStick;
     private final DoubleSolenoid intake = new DoubleSolenoid(1, 2);
-    private static final DigitalInput oDown = new DigitalInput(-1);
+    private static final DigitalInput oDown = new DigitalInput(14);
     private static final Servo oServo = new Servo(4);
     private static boolean ringIntent = false;
     public IntakeSystem(Joystick aux){
@@ -19,6 +19,7 @@ public class IntakeSystem implements Component{
     }
 
     public void tickTeleop() {
+        System.out.println("oDown Triggered: "+oDown.get());
         servoTick();
         if(auxStick.getRawButton(3))
             intake.set(DoubleSolenoid.Value.kForward);
