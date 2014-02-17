@@ -1,6 +1,5 @@
 package edu.wpi.first.wpilibj.templates;
 
-
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
@@ -9,12 +8,11 @@ import edu.wpi.first.wpilibj.Talon;
 
 public class IntakeSystem implements Component{
 
-    
     private final Talon motorTop = new Talon(3);
     private final Joystick auxStick;
     private final DoubleSolenoid intake = new DoubleSolenoid(1, 2);
     private static final DigitalInput oDown = new DigitalInput(-1);
-    private static final Servo oServo = new Servo(-1);
+    private static final Servo oServo = new Servo(4);
     private static boolean ringIntent = false;
     public IntakeSystem(Joystick aux){
         this.auxStick = aux;
@@ -24,9 +22,9 @@ public class IntakeSystem implements Component{
         servoTick();
         if(auxStick.getRawButton(3))
             intake.set(DoubleSolenoid.Value.kForward);
-        if(auxStick.getRawButton(4)) {
+        if(auxStick.getRawButton(4))
             intakeBall();
-        } else if (auxStick.getRawButton(6))
+        else if (auxStick.getRawButton(6))
             motorTop.set(1);
         else if (auxStick.getRawButton(5))
             motorTop.set(-1);
@@ -47,16 +45,14 @@ public class IntakeSystem implements Component{
             intake.set(DoubleSolenoid.Value.kForward);
             motorTop.set(1);
         } else if (get < 5) {
-            if(Ultrasonic.getDistanceFromWall() > 2){
+            if(Ultrasonic.getDistanceFromWall() < 2){
                 intakeBall();
             }
         } else {
             intake.set(DoubleSolenoid.Value.kForward);
             motorTop.set(0);
             RobotTemplate.self.setSafeToFire();
-        }
-            
-            
+        }       
     }
     private static void servoTick() {
         if(ringIntent && isODown() )
@@ -77,5 +73,4 @@ public class IntakeSystem implements Component{
     public static double getOServoValue(){
         return oServo.get();
     }
-
 }
