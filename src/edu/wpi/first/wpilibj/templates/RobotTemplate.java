@@ -45,6 +45,7 @@ public class RobotTemplate extends IterativeRobot {
     }
 
     public void teleopInit() {
+        System.out.println("TELEOPINIT CALLED");
         IntakeSystem.setRingIntent(false);
     }
     

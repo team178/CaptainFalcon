@@ -26,7 +26,7 @@ public class Shooter implements Component{
     }
         
     public void tickTeleop() {
-        shotsFired = true;
+        shotsFired = false;
         if( //i'm so sorry
                 aux.getRawButton(1)&&(
                     IntakeSystem.isODown()||
