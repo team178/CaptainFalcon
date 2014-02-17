@@ -61,6 +61,5 @@ public class Shooter implements Component{
         low.set(Relay.Value.kForward);
         medium.set(Relay.Value.kForward);
         high.set(Relay.Value.kForward);
-    }
-    
+    }   
 }
