@@ -20,7 +20,7 @@ public class Ultrasonic implements Component{
         ultrasonicFront.setAverageBits(2);
     }
     public static void pushSmartDash(){
-        SmartDashboard.putBoolean("Distance From Wall", .8<= getDistanceFromWall() &&getDistanceFromWall()<=1.2);
+        SmartDashboard.putNumber("Distance From Wall", getDistanceFromWall());
     }
     public static double getDistanceFromWall(){
         return ultrasonicFront.getAverageVoltage() * stolarzConstant;
