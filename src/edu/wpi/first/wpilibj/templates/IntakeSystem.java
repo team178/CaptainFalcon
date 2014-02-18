@@ -60,9 +60,10 @@ public class IntakeSystem implements Component{
         }       
     }
     private static void servoTick() {
+        System.out.println("ringIntent: "+ringIntent);
         if(ringIntent && isODown() )
             oServo.set(1);
-        else if (!ringIntent && intakeTimer.get() > 5)
+        else if (!ringIntent && intakeTimer.get() > 2)
             oServo.set(0);
     }
     public static boolean isRingIntent() {

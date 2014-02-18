@@ -27,6 +27,8 @@ public class Shooter implements Component{
         
     public void tickTeleop() {
         shotsFired = false;
+        if(aux.getRawButton(1))
+            System.out.println("oRing down: " + IntakeSystem.isODown());
         if( //i'm so sorry
                 aux.getRawButton(1)&&(
                     IntakeSystem.isODown()||
@@ -48,9 +50,10 @@ public class Shooter implements Component{
         System.out.println();
         if(
                 IntakeSystem.isODown() &&
-                Ultrasonic.getDistanceFromWall() <= 1.2 &&
+                Ultrasonic.getDistanceFromWall() <= 1.05 &&
                 !shotsFired &&
-                RobotTemplate.self.isSafeToFire()
+                RobotTemplate.self.isSafeToFire() &&
+                RobotTemplate.self.getAutonomousTimer().get() > 7
         ){
             extend();
             System.out.println("BANG");

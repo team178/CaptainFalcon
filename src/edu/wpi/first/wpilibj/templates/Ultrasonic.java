@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Ultrasonic implements Component{
     private static final AnalogChannel ultrasonicFront = new AnalogChannel(1);
-    public final static double stolarzConstant = 1/0.628;
+    public final static double stolarzConstant = 1/0.813;
 
     public Ultrasonic() {
         ultrasonicFront.setAverageBits(3);
