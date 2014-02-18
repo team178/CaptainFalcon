@@ -22,9 +22,11 @@ public class IntakeSystem implements Component{
     }
 
     public void tickTeleop() {
-        if(auxStick.getRawButton(2))
+        if(auxStick.getRawButton(2)) //override oDown
             IntakeSystem.setRingIntent(false);
+        
         servoTick();
+        
         if(auxStick.getRawButton(3))
             intake.set(DoubleSolenoid.Value.kForward);
         if(auxStick.getRawButton(4))
