@@ -16,9 +16,11 @@ public class IntakeSystem implements Component{
     private static final Servo oServo = new Servo(4);
     private static boolean ringIntent = false;
     private static final Timer intakeTimer = new Timer();
+    private static final Timer servoMoveTimer = new Timer();
     public IntakeSystem(Joystick aux){
         this.auxStick = aux;
         intakeTimer.start();
+        servoMoveTimer.start();
     }
 
     public void tickTeleop() {
@@ -62,6 +64,7 @@ public class IntakeSystem implements Component{
         }       
     }
     private static void servoTick() {
+        moveServo();
         System.out.println("ringIntent: "+ringIntent);
         if(ringIntent && isODown() )
             oServo.set(1);
@@ -82,5 +85,16 @@ public class IntakeSystem implements Component{
     }
     public static double getOServoValue(){
         return oServo.get();
+    }
+
+    private static void moveServo() {
+        if(servoMoveTimer.get()>3)
+            oServo.set(.5);
+        
+    }
+    private static void setServo(double p) {
+        oServo.set(p);
+        servoMoveTimer.reset();
+        
     }
 }
