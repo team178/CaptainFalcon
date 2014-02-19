@@ -16,7 +16,6 @@ public class IntakeSystem implements Component{
     private static final Servo oServo = new Servo(4);
     private static boolean ringIntent = false;
     private static final Timer intakeTimer = new Timer();
-
     public IntakeSystem(Joystick aux){
         this.auxStick = aux;
         intakeTimer.start();
@@ -84,4 +83,5 @@ public class IntakeSystem implements Component{
     public static double getOServoValue(){
         return oServo.get();
     }
+
 }
