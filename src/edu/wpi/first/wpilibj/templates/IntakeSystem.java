@@ -66,10 +66,10 @@ public class IntakeSystem implements Component{
     private static void servoTick() {
         moveServo();
         System.out.println("ringIntent: "+ringIntent);
-        if(ringIntent && isODown() )
-            oServo.set(1);
+        if(ringIntent && isODown())
+            setServo(1);
         else if (!ringIntent && intakeTimer.get() > 2)
-            oServo.set(0);
+            setServo(0);
     }
     public static boolean isRingIntent() {
         return ringIntent;
