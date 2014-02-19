@@ -17,6 +17,7 @@ public class IntakeSystem implements Component{
     private static boolean ringIntent = false;
     private static final Timer intakeTimer = new Timer();
     private static final Timer servoMoveTimer = new Timer();
+    private static double lastServoPos = 0.5;
     public IntakeSystem(Joystick aux){
         this.auxStick = aux;
         intakeTimer.start();
@@ -93,8 +94,10 @@ public class IntakeSystem implements Component{
         
     }
     private static void setServo(double p) {
-        oServo.set(p);
-        servoMoveTimer.reset();
-        
+        if(p!=lastServoPos){
+            oServo.set(p);
+            servoMoveTimer.reset();
+            lastServoPos=p;
+        }
     }
 }
