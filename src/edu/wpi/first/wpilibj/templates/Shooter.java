@@ -8,6 +8,7 @@ package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
