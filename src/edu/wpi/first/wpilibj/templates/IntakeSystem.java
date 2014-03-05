@@ -74,6 +74,7 @@ public class IntakeSystem implements Component {
     }
 
     public static void setRingIntent(boolean aRingIntent) {
+        System.out.println("ring:"+aRingIntent);
         ringIntent = aRingIntent;
         if (!aRingIntent)
             intakeTimer.reset();

@@ -12,7 +12,6 @@ public class LittleFinger implements Component {
     private final static Timer runTime = new Timer();
     private static final Servo oServo = new Servo(4);
 
-    
     public LittleFinger() {
         runTime.start();
     }
@@ -26,15 +25,26 @@ public class LittleFinger implements Component {
     }
 
     private void tick() {
-        if (runTime.get() < 2)
-            oServo.set(servoIntent ? 1 : 0);
-        else
+        if (runTime.get() < 2) {
+            if(servoIntent)
+                oServo.set(1.0);
+            else
+                oServo.set(0.1);
+        } else {
             oServo.set(0.5);
+        }
+        System.out.println("servo: " + servoIntent + "\ntime: " + runTime.get());
     }
 
-    public static void setServoIntent(boolean servoIntent) {
-        if (servoIntent != LittleFinger.servoIntent) {
-            LittleFinger.servoIntent = servoIntent;
+    public static void setServoIntent(boolean newServoIntent) {
+
+        if (newServoIntent != LittleFinger.servoIntent) {
+            LittleFinger.servoIntent = newServoIntent;
+            System.out.println("PLOP");
+            System.out.println("PLOP");
+            System.out.println("PLOP");
+            System.out.println("PLOP");
+            System.out.println("PLOP");
             runTime.reset();
         }
     }
