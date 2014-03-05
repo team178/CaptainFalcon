@@ -47,20 +47,20 @@ public class Shooter implements Component{
         System.out.println(IntakeSystem.isODown());
         System.out.println(Ultrasonic.getDistanceFromWall());
         System.out.println(!shotsFired);
-        System.out.println(RobotTemplate.self.isSafeToFire());
+        System.out.println(Robot.self.isSafeToFire());
         System.out.println();
         if(
                 IntakeSystem.isODown() &&
                 Ultrasonic.getDistanceFromWall() <= 1.05 &&
                 !shotsFired &&
-                RobotTemplate.self.isSafeToFire() &&
-                RobotTemplate.self.getAutonomousTimer().get() > 7
+                Robot.self.isSafeToFire() &&
+                Robot.self.getAutonomousTimer().get() > 7
         ){
             extend();
             System.out.println("BANG");
             shotsFired = true;
-            lastFired = RobotTemplate.self.getAutonomousTimer().get();
-        } else if( RobotTemplate.self.getAutonomousTimer().get() > lastFired + .4 ){
+            lastFired = Robot.self.getAutonomousTimer().get();
+        } else if( Robot.self.getAutonomousTimer().get() > lastFired + .4 ){
             retract();
             IntakeSystem.setRingIntent(false);
         }

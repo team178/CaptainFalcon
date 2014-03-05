@@ -21,12 +21,12 @@ import edu.wpi.first.wpilibj.Watchdog;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class RobotTemplate extends IterativeRobot {
+public class Robot extends IterativeRobot {
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
-    public static RobotTemplate self;
+    public static Robot self;
     private boolean safeToFire;
     private final Joystick main = new Joystick(1);
     private final Joystick aux = new Joystick(2);
@@ -37,10 +37,11 @@ public class RobotTemplate extends IterativeRobot {
         new Drivetrain(main), 
         new IntakeSystem(aux), 
         new WatchdogWrapper(Watchdog.getInstance()),
-        new Shooter(aux)
+        new Shooter(aux),
+        new LittleFinger()
     };
 
-    public RobotTemplate() {
+    public Robot() {
         self = this; //ignore the warning
     }
 
