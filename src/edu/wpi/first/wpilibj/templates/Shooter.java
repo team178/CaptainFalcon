@@ -3,18 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  * @author Enforers
  */
-public class Shooter implements Component{
+public class Shooter implements Component {
+
     private final Joystick aux;
     private final static Relay low = new Relay(1);
     private final static Relay medium = new Relay(2);
@@ -25,22 +24,18 @@ public class Shooter implements Component{
     public Shooter(Joystick aux) {
         this.aux = aux;
     }
-        
+
     public void tickTeleop() {
         shotsFired = false;
-        if(aux.getRawButton(1))
+        if (aux.getRawButton(1))
             System.out.println("oRing down: " + IntakeSystem.isODown());
-        if( //i'm so sorry
-                aux.getRawButton(1)&&(
-                    IntakeSystem.isODown()||
-                    (aux.getRawButton(7)&&aux.getRawButton(8))
-                )
-        ){
+        if ( //i'm so sorry
+                aux.getRawButton(1) && (IntakeSystem.isODown()
+                || (aux.getRawButton(7) && aux.getRawButton(8)))) {
             extend();
             IntakeSystem.setRingIntent(false);
-        }else{
+        } else
             retract();
-        }   
     }
 
     public void tickAuto() {
@@ -49,18 +44,16 @@ public class Shooter implements Component{
         System.out.println(!shotsFired);
         System.out.println(Robot.self.isSafeToFire());
         System.out.println();
-        if(
-                IntakeSystem.isODown() &&
-                Ultrasonic.getDistanceFromWall() <= 1.05 &&
-                !shotsFired &&
-                Robot.self.isSafeToFire() &&
-                Robot.self.getAutonomousTimer().get() > 7
-        ){
+        if (IntakeSystem.isODown()
+                && Ultrasonic.getDistanceFromWall() <= 1.05
+                && !shotsFired
+                && Robot.self.isSafeToFire()
+                && Robot.self.getAutonomousTimer().get() > 7) {
             extend();
             System.out.println("BANG");
             shotsFired = true;
             lastFired = Robot.self.getAutonomousTimer().get();
-        } else if( Robot.self.getAutonomousTimer().get() > lastFired + .4 ){
+        } else if (Robot.self.getAutonomousTimer().get() > lastFired + .4) {
             retract();
             IntakeSystem.setRingIntent(false);
         }
@@ -76,5 +69,5 @@ public class Shooter implements Component{
         low.set(Relay.Value.kForward);
         medium.set(Relay.Value.kForward);
         high.set(Relay.Value.kForward);
-    }   
+    }
 }

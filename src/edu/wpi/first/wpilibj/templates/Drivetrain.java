@@ -13,9 +13,8 @@ import edu.wpi.first.wpilibj.Victor;
  *
  * @author Enforers
  */
-public class Drivetrain implements Component{
+public class Drivetrain implements Component {
 
-    
     private final Joystick driveStick;
     private static final Victor left = new Victor(1), right = new Victor(2);
     private static final double speedLimit = 0.75;
@@ -28,42 +27,46 @@ public class Drivetrain implements Component{
         // eg. requires(chassis);
         this.driveStick = main;
         Drivetrain.driveTimer.start();
-    }   
+    }
 
-    public void tickTeleop(){
+    public void tickTeleop() {
         double yValue = -driveStick.getY();
-        double twistValue = .8*driveStick.getTwist();
+        double twistValue = .8 * driveStick.getTwist();
         Drivetrain.drive(yValue, twistValue);
     }
+
     public void tickAuto() {
-        if(Ultrasonic.getDistanceFromWall() > 2 && Robot.self.getAutonomousTimer().get() > 3.5)
-            Drivetrain.drive( -.7, -.052 );
-        else if(Ultrasonic.getDistanceFromWall() > 1 && Robot.self.getAutonomousTimer().get() > 3.5)
-            Drivetrain.drive( -.4, -.022 );
-        else if(Ultrasonic.getDistanceFromWall() < 1)
-            Drivetrain.drive( .1, .01 );
+        if (Ultrasonic.getDistanceFromWall() > 2 && Robot.self.getAutonomousTimer().get() > 3.5)
+            Drivetrain.drive(-.7, -.052);
+        else if (Ultrasonic.getDistanceFromWall() > 1 && Robot.self.getAutonomousTimer().get() > 3.5)
+            Drivetrain.drive(-.4, -.022);
+        else if (Ultrasonic.getDistanceFromWall() < 1)
+            Drivetrain.drive(.1, .01);
         else
             Drivetrain.drive(0, 0);
     }
+
     public static double lerp(double a, double b, double f) {
         return (a * (1.0f - f)) + (b * f);
     }
+
     private static boolean doubleEqual(double a, double b) {
-         return Math.abs(a-b)<.1;
+        return Math.abs(a - b) < .1;
     }
+
     public static void drive(double yValue, double twistValue) {
-        if(!doubleEqual(yValue,lastSpeed)){
-            easeInterval=0;
-            lastSpeed=yValue;
+        if (!doubleEqual(yValue, lastSpeed)) {
+            easeInterval = 0;
+            lastSpeed = yValue;
         }
-        if(easeInterval>=1)
-            lastSpeed=yValue;
+        if (easeInterval >= 1)
+            lastSpeed = yValue;
         else {
-            yValue=lerp(lastSpeed, yValue, easeInterval);
-            easeInterval+=Drivetrain.driveTimer.get()/.5;
+            yValue = lerp(lastSpeed, yValue, easeInterval);
+            easeInterval += Drivetrain.driveTimer.get() / .5;
             Drivetrain.driveTimer.reset();
         }
-        left.set( speedLimit * -( yValue - twistValue ) );
-        right.set( speedLimit * ( yValue + twistValue ) );
+        left.set(speedLimit * -(yValue - twistValue));
+        right.set(speedLimit * (yValue + twistValue));
     }
 }

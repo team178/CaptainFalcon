@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
 
 public class IntakeSystem implements Component {
+
     private final Talon motorTop = new Talon(3);
     private final Joystick auxStick;
     private final static DoubleSolenoid intake = new DoubleSolenoid(1, 2);
@@ -74,7 +75,6 @@ public class IntakeSystem implements Component {
     }
 
     public static void setRingIntent(boolean aRingIntent) {
-        System.out.println("ring:"+aRingIntent);
         ringIntent = aRingIntent;
         if (!aRingIntent)
             intakeTimer.reset();

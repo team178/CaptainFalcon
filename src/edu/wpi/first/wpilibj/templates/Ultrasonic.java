@@ -12,24 +12,27 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  * @author Enforers
  */
-public class Ultrasonic implements Component{
+public class Ultrasonic implements Component {
+
     private static final AnalogChannel ultrasonicFront = new AnalogChannel(1);
 
     public Ultrasonic() {
         ultrasonicFront.setAverageBits(3);
     }
-    public static void pushSmartDash(){
+
+    public static void pushSmartDash() {
         SmartDashboard.putNumber("Distance From Wall", getDistanceFromWall());
     }
-    public static double getDistanceFromWall(){
-        return ultrasonicFront.getAverageVoltage() * 1/0.813;
+
+    public static double getDistanceFromWall() {
+        return ultrasonicFront.getAverageVoltage() * 1 / 0.813;
     }
 
-    public  void tickTeleop() {
+    public void tickTeleop() {
         pushSmartDash();
     }
 
     public void tickAuto() {
-        
+
     }
 }

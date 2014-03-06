@@ -33,18 +33,12 @@ public class LittleFinger implements Component {
         } else {
             oServo.set(0.5);
         }
-        System.out.println("servo: " + servoIntent + "\ntime: " + runTime.get());
     }
 
     public static void setServoIntent(boolean newServoIntent) {
 
         if (newServoIntent != LittleFinger.servoIntent) {
             LittleFinger.servoIntent = newServoIntent;
-            System.out.println("PLOP");
-            System.out.println("PLOP");
-            System.out.println("PLOP");
-            System.out.println("PLOP");
-            System.out.println("PLOP");
             runTime.reset();
         }
     }
