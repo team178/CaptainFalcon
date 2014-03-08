@@ -19,11 +19,15 @@ public class Compressor implements Component {
     Relay compressor = new Relay(4, Relay.Direction.kForward);
     DigitalInput cutoff = new DigitalInput(6);
     AnalogChannel analogPressure = new AnalogChannel(3);
-    double pressure;
+    private static double pressure;
 
+    public Compressor() {
+        analogPressure.setAverageBits(4);
+    }
+    
     public void tickTeleop() {
         compressor.set(cutoff.get() ? Relay.Value.kOff : Relay.Value.kForward);
-        pressure = (analogPressure.getVoltage() - .854) * 40.9276;
+        pressure = (analogPressure.getAverageVoltage() - .854) * 40.9276;
         SmartDashboard.putNumber("Pressure", pressure);
 
         SmartDashboard.putBoolean("Ready to Fire", pressure > 80);
@@ -31,5 +35,9 @@ public class Compressor implements Component {
 
     public void tickAuto() {
         compressor.set(cutoff.get() ? Relay.Value.kOff : Relay.Value.kForward);
+    }
+    
+    public static double getPressure(){
+        return pressure;
     }
 }

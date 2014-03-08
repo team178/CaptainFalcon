@@ -27,9 +27,9 @@ public class LittleFinger implements Component {
     private void tick() {
         if (runTime.get() < 2) {
             if(servoIntent)
-                oServo.set(1.0);
-            else
                 oServo.set(0.1);
+            else
+                oServo.set(1.0);
         } else {
             oServo.set(0.5);
         }
