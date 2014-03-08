@@ -43,4 +43,8 @@ public class LittleFinger implements Component {
         }
     }
 
+    public static void overrideRelease() {
+        oServo.set(1.0);
+    }
+    
 }
