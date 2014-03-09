@@ -30,7 +30,7 @@ public class Shooter implements Component {
         if(aux.getRawButton(1)||(aux.getRawButton(7) && aux.getRawButton(8)))
             logFiring();
         if ( //i'm so sorry
-                (aux.getRawButton(1) && IntakeSystem.isODown() && Compressor.getPressure() >= 70)
+                (aux.getRawButton(1) /*&& IntakeSystem.isODown()*/ /*&& Compressor.getPressure() >= 70*/)
                 || (aux.getRawButton(7) && aux.getRawButton(8))) {
             extend();
             IntakeSystem.setRingIntent(false);
@@ -42,7 +42,7 @@ public class Shooter implements Component {
     public void tickAuto() {
         logFiring();
         if (IntakeSystem.isODown()
-                && Ultrasonic.getDistanceFromWall() <= 1.05
+                && Ultrasonic.getDistanceFromWall() <= 1.398
                 && !shotsFired
                 && Robot.self.isSafeToFire()
                 && Robot.self.getAutonomousTimer().get() > 7) {
