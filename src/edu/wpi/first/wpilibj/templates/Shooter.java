@@ -32,16 +32,13 @@ public class Shooter implements Component {
                 || (aux.getRawButton(7) && aux.getRawButton(8))) {
             extend();
             IntakeSystem.setRingIntent(false);
+            logFiring();
         } else
             retract();
     }
 
     public void tickAuto() {
-        System.out.println(IntakeSystem.isODown());
-        System.out.println(Ultrasonic.getDistanceFromWall());
-        System.out.println(!shotsFired);
-        System.out.println(Robot.self.isSafeToFire());
-        System.out.println();
+        logFiring();
         if (IntakeSystem.isODown()
                 && Ultrasonic.getDistanceFromWall() <= 1.05
                 && !shotsFired
@@ -55,6 +52,16 @@ public class Shooter implements Component {
             retract();
             IntakeSystem.setRingIntent(false);
         }
+    }
+
+    public void logFiring() {
+        System.out.println(IntakeSystem.isODown());
+        System.out.println(Ultrasonic.getDistanceFromWall());
+        System.out.println(!shotsFired);
+        if (Robot.self.isAutonomous())
+            System.out.println(Robot.self.isSafeToFire());
+        System.out.println(Compressor.getPressure());
+        System.out.println();
     }
 
     public static void retract() {
