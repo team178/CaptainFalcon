@@ -48,6 +48,7 @@ public class Robot extends IterativeRobot {
     public void teleopInit() {
         System.out.println("TELEOPINIT CALLED");
         IntakeSystem.setRingIntent(false);
+        Shooter.retract();
     }
     
     public void autonomousInit(){

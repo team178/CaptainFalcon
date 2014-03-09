@@ -27,11 +27,9 @@ public class Shooter implements Component {
 
     public void tickTeleop() {
         shotsFired = false;
-        if (aux.getRawButton(1))
-            System.out.println("oRing down: " + IntakeSystem.isODown());
         if ( //i'm so sorry
-                aux.getRawButton(1) && ((IntakeSystem.isODown() && Compressor.getPressure() >= 70)
-                || (aux.getRawButton(7) && aux.getRawButton(8)))) {
+                (aux.getRawButton(1) && IntakeSystem.isODown() && Compressor.getPressure() >= 70)
+                || (aux.getRawButton(7) && aux.getRawButton(8))) {
             extend();
             IntakeSystem.setRingIntent(false);
         } else
