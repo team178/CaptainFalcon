@@ -27,12 +27,14 @@ public class Shooter implements Component {
 
     public void tickTeleop() {
         shotsFired = false;
+        if(aux.getRawButton(1)||(aux.getRawButton(7) && aux.getRawButton(8)))
+            logFiring();
         if ( //i'm so sorry
                 (aux.getRawButton(1) && IntakeSystem.isODown() && Compressor.getPressure() >= 70)
                 || (aux.getRawButton(7) && aux.getRawButton(8))) {
             extend();
             IntakeSystem.setRingIntent(false);
-            logFiring();
+            
         } else
             retract();
     }
