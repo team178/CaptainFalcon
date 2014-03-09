@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Compressor implements Component {
 
     Relay compressor = new Relay(4, Relay.Direction.kForward);
-    DigitalInput cutoff = new DigitalInput(6);
+    DigitalInput cutoff = new DigitalInput(13);
     AnalogChannel analogPressure = new AnalogChannel(3);
     private static double pressure;
 

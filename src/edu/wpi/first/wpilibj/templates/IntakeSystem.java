@@ -64,12 +64,6 @@ public class IntakeSystem implements Component {
             LittleFinger.setServoIntent(true);
         else if (!ringIntent && intakeTimer.get() > 2)
             LittleFinger.setServoIntent(false);
-//        if (IntakeSystem.self.auxStick.getRawButton(7))
-//            oServo.set(0);
-//        if (IntakeSystem.self.auxStick.getRawButton(8))
-//            oServo.set(1);
-//        if (IntakeSystem.self.auxStick.getRawButton(10))
-//            oServo.set(.5);
     }
 
     public static boolean isRingIntent() {

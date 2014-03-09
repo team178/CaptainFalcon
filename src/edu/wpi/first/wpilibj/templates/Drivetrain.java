@@ -37,9 +37,9 @@ public class Drivetrain implements Component {
 
     public void tickAuto() {
         if (Ultrasonic.getDistanceFromWall() > 2 && Robot.self.getAutonomousTimer().get() > 3.5)
-            Drivetrain.drive(-.7, -.052);
+            Drivetrain.drive(-.7, -.076);
         else if (Ultrasonic.getDistanceFromWall() > 1 && Robot.self.getAutonomousTimer().get() > 3.5)
-            Drivetrain.drive(-.4, -.022);
+            Drivetrain.drive(-.4, -.052);
         else if (Ultrasonic.getDistanceFromWall() < 1)
             Drivetrain.drive(.1, .01);
         else
@@ -66,7 +66,7 @@ public class Drivetrain implements Component {
             easeInterval += Drivetrain.driveTimer.get() / .5;
             Drivetrain.driveTimer.reset();
         }
-        left.set(speedLimit * -(yValue - twistValue));
-        right.set(speedLimit * (yValue + twistValue));
+        left.set(speedLimit * -(-yValue - twistValue));
+        right.set(speedLimit * (-yValue + twistValue));
     }
 }
