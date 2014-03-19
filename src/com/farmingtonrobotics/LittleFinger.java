@@ -1,7 +1,7 @@
 /**
  * @author gnomes heheh (team 178)
  */
-package edu.wpi.first.wpilibj.templates;
+package com.farmingtonrobotics;
 
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Timer;

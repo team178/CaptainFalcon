@@ -1,4 +1,4 @@
-package edu.wpi.first.wpilibj.templates;
+package com.farmingtonrobotics;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
