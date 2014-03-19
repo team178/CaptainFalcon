@@ -7,6 +7,7 @@ package com.farmingtonrobotics;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  *
@@ -20,21 +21,22 @@ public class Shooter implements Component {
     private final static Relay high = new Relay(3);
     private boolean shotsFired = false;
     private double lastFired;
+    private Timer shooterTimer;
 
     public Shooter(Joystick aux) {
         this.aux = aux;
+        shooterTimer.start();
     }
 
     public void tickTeleop() {
         shotsFired = false;
         if(aux.getRawButton(1)||(aux.getRawButton(7) && aux.getRawButton(8)))
             logFiring();
-        if ( //i'm so sorry
-                (aux.getRawButton(1) /*&& IntakeSystem.isODown()*/ /*&& Compressor.getPressure() >= 70*/)
-                || (aux.getRawButton(7) && aux.getRawButton(8))) {
+        if(aux.getRawButton(1) && IntakeSystem.isODown() && Compressor.getPressure() >= 70)
+            shooterTimer.reset();
+        if ((aux.getRawButton(7) && aux.getRawButton(8)) || (shooterTimer.get() < .5)) {
             extend();
             IntakeSystem.setRingIntent(false);
-            
         } else
             retract();
     }
@@ -72,7 +74,7 @@ public class Shooter implements Component {
         high.set(Relay.Value.kOff);
     }
 
-    public static void extend() {
+    private static void extend() {
         low.set(Relay.Value.kForward);
         medium.set(Relay.Value.kForward);
         high.set(Relay.Value.kForward);
