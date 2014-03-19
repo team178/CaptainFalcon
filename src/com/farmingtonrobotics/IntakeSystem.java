@@ -1,4 +1,4 @@
-package edu.wpi.first.wpilibj.templates;
+package com.farmingtonrobotics;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -14,6 +14,7 @@ public class IntakeSystem implements Component {
     private static final DigitalInput oDown = new DigitalInput(14);
     private static boolean ringIntent = false;
     private static final Timer intakeTimer = new Timer();
+	public static boolean immediateServo;
 
     public IntakeSystem(Joystick aux) {
         this.auxStick = aux;
@@ -23,9 +24,12 @@ public class IntakeSystem implements Component {
     public void tickTeleop() {
         servoTick();
         if (auxStick.getRawButton(2)){ //override oDown
-            LittleFinger.overrideRelease();
+            //LittleFinger.overrideRelease();
+			immediateServo = true;
             IntakeSystem.setRingIntent(false);
-        }
+        } else {
+			immediateServo = false;
+		}
         if (auxStick.getRawButton(3))
             intake.set(DoubleSolenoid.Value.kForward);
         if (auxStick.getRawButton(4))
