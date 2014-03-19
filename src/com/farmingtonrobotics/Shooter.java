@@ -59,12 +59,11 @@ public class Shooter implements Component {
     }
 
     public void logFiring() {
-        System.out.println("Is the O Ring down? "+IntakeSystem.isODown());
-        System.out.println("Units from wall: "+Ultrasonic.getDistanceFromWall());
-        System.out.println("Have I fired yet? "+!shotsFired);
+        System.out.println("Units from wall: " + Ultrasonic.getDistanceFromWall());
+        System.out.println("Have I fired yet? " + !shotsFired);
         if (Robot.self.isAutonomous())
-            System.out.println("Am I at the firing part of the Autonomous sequence? "+Robot.self.isSafeToFire());
-        System.out.println("PSI: "+Compressor.getPressure());
+            System.out.println("Am I at the firing part of the Autonomous sequence? " + Robot.self.isSafeToFire());
+        System.out.println("PSI: " + Compressor.getPressure());
         System.out.println();
     }
 
