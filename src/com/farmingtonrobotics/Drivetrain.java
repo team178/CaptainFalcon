@@ -37,11 +37,11 @@ public class Drivetrain implements Component {
 
     public void tickAuto() {
         if (Ultrasonic.getDistanceFromWall() > 2 && Robot.self.getAutonomousTimer().get() > 3.5)
-            Drivetrain.drive(-.7, -.076);
+            Drivetrain.drive(-.7, .08);
         else if (Ultrasonic.getDistanceFromWall() > 1 && Robot.self.getAutonomousTimer().get() > 3.5)
-            Drivetrain.drive(-.4, -.052);
+            Drivetrain.drive(-.525, .06);
         else if (Ultrasonic.getDistanceFromWall() < 1)
-            Drivetrain.drive(.1, .01);
+            Drivetrain.drive(.1, -.1991);
         else
             Drivetrain.drive(0, 0);
     }

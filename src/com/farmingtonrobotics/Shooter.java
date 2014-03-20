@@ -21,7 +21,7 @@ public class Shooter implements Component {
     private final static Relay high = new Relay(3);
     private boolean shotsFired = false;
     private double lastFired;
-    private Timer shooterTimer;
+    private final Timer shooterTimer = new Timer();
 
     public Shooter(Joystick aux) {
         this.aux = aux;
@@ -44,7 +44,7 @@ public class Shooter implements Component {
     public void tickAuto() {
         logFiring();
         if (IntakeSystem.isODown()
-                && Ultrasonic.getDistanceFromWall() <= 1.398
+                && Ultrasonic.getDistanceFromWall() <= 1.3
                 && !shotsFired
                 && Robot.self.isSafeToFire()
                 && Robot.self.getAutonomousTimer().get() > 7) {
