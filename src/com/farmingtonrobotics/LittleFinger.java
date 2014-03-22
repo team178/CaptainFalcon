@@ -25,7 +25,7 @@ public class LittleFinger implements Component {
     }
 
     private void tick() {
-        if (runTime.get() < 2 || IntakeSystem.immediateServo) {
+        if (runTime.get() < 2) {
             if(servoIntent)
                 oServo.set(0.1);
             else
@@ -41,10 +41,6 @@ public class LittleFinger implements Component {
             LittleFinger.servoIntent = oldServoIntent;
             runTime.reset();
         }
-    }
-
-    public static void overrideRelease() {
-        oServo.set(1.0);
     }
     
 }

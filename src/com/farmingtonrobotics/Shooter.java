@@ -44,7 +44,7 @@ public class Shooter implements Component {
     public void tickAuto() {
         logFiring();
         if (IntakeSystem.isODown()
-                && Ultrasonic.getDistanceFromWall() <= 1.3
+                && Ultrasonic.getDistanceFromWall() <= 1.396
                 && !shotsFired
                 && Robot.self.isSafeToFire()
                 && Robot.self.getAutonomousTimer().get() > 7) {
@@ -52,7 +52,7 @@ public class Shooter implements Component {
             System.out.println("BANG");
             shotsFired = true;
             lastFired = Robot.self.getAutonomousTimer().get();
-        } else if (Robot.self.getAutonomousTimer().get() > lastFired + .4) {
+        } else if (Robot.self.getAutonomousTimer().get() > lastFired + .8) {
             retract();
             IntakeSystem.setRingIntent(false);
         }

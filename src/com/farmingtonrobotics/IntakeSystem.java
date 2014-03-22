@@ -23,13 +23,11 @@ public class IntakeSystem implements Component {
 
     public void tickTeleop() {
         servoTick();
-        if (auxStick.getRawButton(2)){ //override oDown
-            //LittleFinger.overrideRelease();
-			immediateServo = true;
-            IntakeSystem.setRingIntent(false);
-        } else {
-			immediateServo = false;
-		}
+        if (auxStick.getRawButton(2)) {
+            immediateServo = true;
+            setRingIntent(false);
+        } else
+            immediateServo = false;
         if (auxStick.getRawButton(3))
             intake.set(DoubleSolenoid.Value.kForward);
         if (auxStick.getRawButton(4))
@@ -66,7 +64,7 @@ public class IntakeSystem implements Component {
     private static void servoTick() {
         if (ringIntent && isODown())
             LittleFinger.setServoIntent(true);
-        else if (!ringIntent && intakeTimer.get() > 2)
+        else if (!ringIntent && (intakeTimer.get() > 2 || immediateServo))
             LittleFinger.setServoIntent(false);
     }
 
