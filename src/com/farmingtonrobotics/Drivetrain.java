@@ -17,8 +17,8 @@ public class Drivetrain implements Component {
 
     private final Joystick driveStick;
     private static final Victor left = new Victor(1), right = new Victor(2);
-    private static final double speedLimit = 0.75;
-    private static double easeInterval = 1;
+    private static final double speedLimit = 1;
+    private static double easeInterval = .5;
     private static double lastSpeed = 0;
     private static final Timer driveTimer = new Timer();
 
@@ -31,7 +31,7 @@ public class Drivetrain implements Component {
 
     public void tickTeleop() {
         double yValue = -driveStick.getY();
-        double twistValue = .8 * driveStick.getTwist();
+        double twistValue = driveStick.getTwist();
         Drivetrain.drive(yValue, twistValue);
     }
 
