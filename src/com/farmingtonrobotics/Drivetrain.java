@@ -37,9 +37,9 @@ public class Drivetrain implements Component {
 
     public void tickAuto() {
         if (Ultrasonic.getDistanceFromWall() > 2 && Robot.self.getAutonomousTimer().get() > 3.5)
-            Drivetrain.drive(-.7, .08);
+            Drivetrain.drive(-.7, 0.04);
         else if (Ultrasonic.getDistanceFromWall() > 1 && Robot.self.getAutonomousTimer().get() > 3.5)
-            Drivetrain.drive(-.525, .06);
+            Drivetrain.drive(-.525, 0.02);
 //        else if (Ultrasonic.getDistanceFromWall() < 1)
 //            Drivetrain.drive(.1, -.1991);
         else
