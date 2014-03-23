@@ -40,8 +40,8 @@ public class Drivetrain implements Component {
             Drivetrain.drive(-.7, .08);
         else if (Ultrasonic.getDistanceFromWall() > 1 && Robot.self.getAutonomousTimer().get() > 3.5)
             Drivetrain.drive(-.525, .06);
-        else if (Ultrasonic.getDistanceFromWall() < 1)
-            Drivetrain.drive(.1, -.1991);
+//        else if (Ultrasonic.getDistanceFromWall() < 1)
+//            Drivetrain.drive(.1, -.1991);
         else
             Drivetrain.drive(0, 0);
     }

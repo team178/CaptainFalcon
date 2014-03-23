@@ -44,7 +44,7 @@ public class Shooter implements Component {
     public void tickAuto() {
         logFiring();
         if (IntakeSystem.isODown()
-                && Ultrasonic.getDistanceFromWall() <= 1.5
+                && Ultrasonic.getDistanceFromWall() <= 1.45
                 && !shotsFired
                 && Robot.self.isSafeToFire()
                 && Robot.self.getAutonomousTimer().get() > 7) {
