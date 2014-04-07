@@ -26,7 +26,7 @@ public class Drivetrain implements Component {
     public Drivetrain(Joystick main) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        this.driveStick = main;
+        this.driveStick = new Joystick(1);
         this.kidStick = new Joystick(3);
         this.driveTimer.start();
     }

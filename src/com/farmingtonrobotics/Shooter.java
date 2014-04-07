@@ -37,6 +37,7 @@ public class Shooter implements Component {
         if ((aux.getRawButton(7) && aux.getRawButton(8)) || (shooterTimer.get() < .5)) {
             extend();
             IntakeSystem.setRingIntent(false);
+            RingFinger.setDonutIntent(false);
         } else
             retract();
     }
