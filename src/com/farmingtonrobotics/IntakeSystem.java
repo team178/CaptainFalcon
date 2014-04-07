@@ -26,6 +26,7 @@ public class IntakeSystem implements Component {
         if (auxStick.getRawButton(2)) {
             immediateServo = true;
             setRingIntent(false);
+            RingFinger.setDonutIntent(false);
         } else
             immediateServo = false;
         if (auxStick.getRawButton(3))
@@ -44,6 +45,7 @@ public class IntakeSystem implements Component {
         intake.set(DoubleSolenoid.Value.kReverse);
         motorTop.set(0.5);
         IntakeSystem.setRingIntent(true);
+        RingFinger.setDonutIntent(true);
     }
 
     public void tickAuto() {

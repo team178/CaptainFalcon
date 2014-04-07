@@ -38,7 +38,8 @@ public class Robot extends IterativeRobot {
         new IntakeSystem(aux), 
         new WatchdogWrapper(Watchdog.getInstance()),
         new Shooter(aux),
-        new LittleFinger()
+        new LittleFinger(),
+        new RingFinger(aux)
     };
 
     public Robot() {
