@@ -50,12 +50,14 @@ public class Robot extends IterativeRobot {
         System.out.println("TELEOPINIT CALLED");
         IntakeSystem.setRingIntent(false);
         Shooter.retract();
+        RingFinger.setDonutIntent(false);
     }
     
     public void autonomousInit(){
         this.autonomousTimer = new Timer();
         this.autonomousTimer.start();
         this.safeToFire = false;
+        RingFinger.setDonutIntent(false);
     }
     
     /**

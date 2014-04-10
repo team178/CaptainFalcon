@@ -34,14 +34,14 @@ public class Drivetrain implements Component {
     public void tickTeleop() {
         double yValue = -driveStick.getY();
         double twistValue = driveStick.getTwist();
-        this.kiddyDrive();
+        this.drive(yValue, twistValue);
     }
 
     public void tickAuto() {
         if (Ultrasonic.getDistanceFromWall() > 2 && Robot.self.getAutonomousTimer().get() > 3.5)
-            this.drive(-.7, 0.04);
+            this.drive(-.7, 0.00);
         else if (Ultrasonic.getDistanceFromWall() > .75 && Robot.self.getAutonomousTimer().get() > 3.5)
-            this.drive(-.525, 0.02);
+            this.drive(-.525, 0.00);
         else
             this.drive(0, 0);
     }
