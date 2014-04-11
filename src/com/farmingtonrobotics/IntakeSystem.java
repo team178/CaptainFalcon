@@ -14,7 +14,7 @@ public class IntakeSystem implements Component {
     private static final DigitalInput oDown = new DigitalInput(14);
     private static boolean ringIntent = false;
     private static final Timer intakeTimer = new Timer();
-	public static boolean immediateServo;
+    public static boolean immediateServo;
 
     public IntakeSystem(Joystick aux) {
         this.auxStick = aux;

@@ -38,10 +38,10 @@ public class Drivetrain implements Component {
     }
 
     public void tickAuto() {
-        if (Ultrasonic.getDistanceFromWall() > 2 && Robot.self.getAutonomousTimer().get() > 3.5)
-            this.drive(-.7, 0.00);
+        if (Ultrasonic.getDistanceFromWall() > 1 && Robot.self.getAutonomousTimer().get() > 3.5)
+            this.drive(-1.0, 0.04);
         else if (Ultrasonic.getDistanceFromWall() > .75 && Robot.self.getAutonomousTimer().get() > 3.5)
-            this.drive(-.525, 0.00);
+            this.drive(-.5, 0.02);
         else
             this.drive(0, 0);
     }
@@ -70,15 +70,15 @@ public class Drivetrain implements Component {
         right.set(speedLimit * (-yValue + twistValue));
     }
     
-    public void kiddyDrive() {
-        double mainY = -driveStick.getY();
-        double mainTwist = .8 * driveStick.getTwist();
-        if (driveStick.getTrigger()) {
-            this.drive(mainY, mainTwist);
-        } else {
-            double kiddyY = -kidStick.getY();
-            double kiddyTwist = .8 * kidStick.getTwist();
-            this.drive(kiddyY, kiddyTwist);
-        }
-    }
+//    public void kiddyDrive() {
+//        double mainY = -driveStick.getY();
+//        double mainTwist = .8 * driveStick.getTwist();
+//        if (driveStick.getTrigger()) {
+//            this.drive(mainY, mainTwist);
+//        } else {
+//            double kiddyY = -kidStick.getY();
+//            double kiddyTwist = .8 * kidStick.getTwist();
+//            this.drive(kiddyY, kiddyTwist);
+//        }
+//    }
 }

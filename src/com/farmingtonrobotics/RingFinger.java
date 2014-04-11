@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.Timer;
  * @author Enforers
  */
 public class RingFinger implements Component {
-
     private static boolean donutIntent = false;
     private final static Timer runTime = new Timer();
     private static final DoubleSolenoid solenoid = new DoubleSolenoid(4,3);
@@ -26,7 +25,7 @@ public class RingFinger implements Component {
     }
 
     public void tickTeleop() {
-        if ((runTime.get() > 1 && donutIntent && IntakeSystem.isODown()) || aux.getRawAxis(3) < -0.9)
+        if ((runTime.get() > 3 && donutIntent && IntakeSystem.isODown()) || aux.getRawAxis(3) < -0.9)
             solenoid.set(DoubleSolenoid.Value.kForward);
         else if (!donutIntent)
             solenoid.set(DoubleSolenoid.Value.kReverse);

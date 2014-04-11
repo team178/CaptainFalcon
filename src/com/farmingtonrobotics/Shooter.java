@@ -30,9 +30,9 @@ public class Shooter implements Component {
 
     public void tickTeleop() {
         shotsFired = false;
-        if(aux.getRawButton(1)||(aux.getRawButton(7) && aux.getRawButton(8)))
+        if (aux.getRawButton(1) || (aux.getRawButton(7) && aux.getRawButton(8)))
             logFiring();
-        if(aux.getRawButton(1) && IntakeSystem.isODown() && Compressor.getPressure() >= 70)
+        if (aux.getRawButton(1) && IntakeSystem.isODown())
             shooterTimer.reset();
         if ((aux.getRawButton(7) && aux.getRawButton(8)) || (shooterTimer.get() < .5)) {
             extend();
