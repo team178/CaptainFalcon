@@ -44,6 +44,7 @@ public class Robot extends IterativeRobot {
 
     public Robot() {
         self = this; //ignore the warning
+        // comments should describe "why" and not "what"
     }
 
     public void teleopInit() {
