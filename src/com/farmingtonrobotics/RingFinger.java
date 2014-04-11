@@ -25,7 +25,7 @@ public class RingFinger implements Component {
     }
 
     public void tickTeleop() {
-        if ((runTime.get() > 2 && donutIntent && IntakeSystem.isODown()) || aux.getRawAxis(3) < -0.9)
+        if ((runTime.get() > 3 && donutIntent && IntakeSystem.isODown()) || aux.getRawAxis(3) < -0.9)
             solenoid.set(DoubleSolenoid.Value.kForward);
         else if (!donutIntent)
             solenoid.set(DoubleSolenoid.Value.kReverse);
