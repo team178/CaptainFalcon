@@ -44,6 +44,11 @@ public class Robot extends IterativeRobot {
 
     public Robot() {
         self = this; //ignore the warning
+        /* Robot.self exists because static methods need to call Robot methods..
+         * but Robot methods are instance methods, which are incompatible
+         * so we statically store the last Robot instance created and call
+         * methods on that instead
+         */
     }
 
     public void teleopInit() {
