@@ -25,8 +25,8 @@ public class IntakeSystem implements Component {
         servoTick();
         if (auxStick.getRawButton(2)) {
             immediateServo = true;
-            setRingIntent(false);
-            RingFinger.setDonutIntent(false);
+            setRingLockedWhenPossible(false);
+            RingFinger.setLockRingFingerWhenPossible(false);
         } else
             immediateServo = false;
         if (auxStick.getRawButton(3))
@@ -44,8 +44,8 @@ public class IntakeSystem implements Component {
     public void intakeBall() {
         intake.set(DoubleSolenoid.Value.kReverse);
         motorTop.set(0.5);
-        IntakeSystem.setRingIntent(true);
-        RingFinger.setDonutIntent(true);
+        IntakeSystem.setRingLockedWhenPossible(true);
+        RingFinger.setLockRingFingerWhenPossible(true);
     }
 
     public void tickAuto() {
@@ -74,7 +74,7 @@ public class IntakeSystem implements Component {
         return ringIntent;
     }
 
-    public static void setRingIntent(boolean aRingIntent) {
+    public static void setRingLockedWhenPossible(boolean aRingIntent) {
         ringIntent = aRingIntent;
         if (!aRingIntent)
             intakeTimer.reset();

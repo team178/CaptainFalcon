@@ -30,7 +30,7 @@ public class RingFinger implements Component {
         else if (!donutIntent)
             solenoid.set(DoubleSolenoid.Value.kReverse);
         if (aux.getRawAxis(3) > 0.9)
-            setDonutIntent(false);
+            setLockRingFingerWhenPossible(false);
         /*
          for every tick in teleop:
 
@@ -44,7 +44,7 @@ public class RingFinger implements Component {
         solenoid.set(DoubleSolenoid.Value.kReverse);
     }
 
-    public static void setDonutIntent(boolean oldDonutIntent) {
+    public static void setLockRingFingerWhenPossible(boolean oldDonutIntent) {
         if (oldDonutIntent != RingFinger.donutIntent) {
             RingFinger.donutIntent = oldDonutIntent;
             runTime.reset();

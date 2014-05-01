@@ -36,8 +36,8 @@ public class Shooter implements Component {
             shooterTimer.reset();
         if ((aux.getRawButton(7) && aux.getRawButton(8)) || (shooterTimer.get() < .5)) {
             extend();
-            IntakeSystem.setRingIntent(false);
-            RingFinger.setDonutIntent(false);
+            IntakeSystem.setRingLockedWhenPossible(false);
+            RingFinger.setLockRingFingerWhenPossible(false);
         } else
             retract();
     }
@@ -55,7 +55,7 @@ public class Shooter implements Component {
             lastFired = Robot.self.getAutonomousTimer().get();
         } else if (Robot.self.getAutonomousTimer().get() > lastFired + .8) {
             retract();
-            IntakeSystem.setRingIntent(false);
+            IntakeSystem.setRingLockedWhenPossible(false);
         }
     }
 

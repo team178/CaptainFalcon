@@ -47,16 +47,16 @@ public class Robot extends IterativeRobot {
 
     public void teleopInit() {
         System.out.println("TELEOPINIT CALLED");
-        IntakeSystem.setRingIntent(false);
+        IntakeSystem.setRingLockedWhenPossible(false);
         Shooter.retract();
-        RingFinger.setDonutIntent(false);
+        RingFinger.setLockRingFingerWhenPossible(false);
     }
 
     public void autonomousInit() {
         this.autonomousTimer = new Timer();
         this.autonomousTimer.start();
         this.autoSafeToFire = false;
-        RingFinger.setDonutIntent(false);
+        RingFinger.setLockRingFingerWhenPossible(false);
     }
 
     /**
