@@ -58,7 +58,6 @@ public class Robot extends IterativeRobot {
         this.autonomousTimer = new Timer();
         this.autonomousTimer.start();
         this.safeToFire = false;
-        IntakeSystem.setRingIntent(false);
         RingFinger.setDonutIntent(false);
     }
     
