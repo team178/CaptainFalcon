@@ -30,6 +30,7 @@ public class Robot extends IterativeRobot {
     private final Joystick main = new Joystick(1);
     private final Joystick aux = new Joystick(2);
     private Timer autonomousTimer;
+    //This array is explained in the specification: http://is.gd/Vjk5wr
     private final Component[] components = {
         new Ultrasonic(),
         new Compressor(),
