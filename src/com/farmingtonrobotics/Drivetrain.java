@@ -22,6 +22,8 @@ public class Drivetrain implements Component {
     private static double easeInterval = .5;
     private static double lastSpeed = 0;
     private final Timer driveTimer = new Timer();
+    
+    private static final boolean IS_KIDDY = false; //change to true when kiddy
 
     public Drivetrain(Joystick main) {
         // Use requires() here to declare subsystem dependencies
@@ -34,7 +36,10 @@ public class Drivetrain implements Component {
     public void tickTeleop() {
         double yValue = -driveStick.getY();
         double twistValue = driveStick.getTwist();
-        this.drive(yValue, twistValue);
+        if(IS_KIDDY)
+            this.kiddyDrive(yValue, twistValue);
+        else
+            this.drive(yValue, twistValue);
     }
 
     public void tickAuto() {
@@ -70,15 +75,15 @@ public class Drivetrain implements Component {
         right.set(speedLimit * (-yValue + twistValue));
     }
     
-//    public void kiddyDrive() {
-//        double mainY = -driveStick.getY();
-//        double mainTwist = .8 * driveStick.getTwist();
-//        if (driveStick.getTrigger()) {
-//            this.drive(mainY, mainTwist);
-//        } else {
-//            double kiddyY = -kidStick.getY();
-//            double kiddyTwist = .8 * kidStick.getTwist();
-//            this.drive(kiddyY, kiddyTwist);
-//        }
-//    }
+    public void kiddyDrive(double yValue, double twistValue) {
+        double mainY = yValue;
+        double mainTwist = twistValue;
+        if (driveStick.getTrigger()) {
+            this.drive(mainY, mainTwist);
+        } else {
+            double kiddyY = -kidStick.getY();
+            double kiddyTwist = .8 * kidStick.getTwist();
+            this.drive(kiddyY, kiddyTwist);
+        }
+    }
 }
