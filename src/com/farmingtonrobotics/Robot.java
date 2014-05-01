@@ -26,7 +26,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public static Robot self;
-    private boolean safeToFire;
+    private boolean autoSafeToFire;
     private final Joystick main = new Joystick(1);
     private final Joystick aux = new Joystick(2);
     private Timer autonomousTimer;
@@ -55,7 +55,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         this.autonomousTimer = new Timer();
         this.autonomousTimer.start();
-        this.safeToFire = false;
+        this.autoSafeToFire = false;
         RingFinger.setDonutIntent(false);
     }
 
@@ -99,13 +99,13 @@ public class Robot extends IterativeRobot {
 
     public boolean isSafeToFire() {
         if (this.isAutonomous())
-            return safeToFire;
+            return autoSafeToFire;
         throw new IllegalStateException("Tried to get safety outside of Autonomous");
     }
 
     public void setSafeToFire() {
         if (this.isAutonomous())
-            safeToFire = true;
+            autoSafeToFire = true;
         else
             throw new IllegalStateException("Tried to set safety outside of Autonomous");
     }
